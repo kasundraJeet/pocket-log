@@ -35,11 +35,11 @@ const onSubmit = handleSubmit((values) => {
 
 <template>
   <FormWrapper>
-    <form className="p-6 md:p-8" @submit="onSubmit">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col items-center text-center">
-          <h1 className="text-2xl font-bold">Crete Account</h1>
-          <p className="text-balance text-muted-foreground">Crete account to your PocketLog account</p>
+    <form class="p-6 md:p-8" @submit="onSubmit">
+      <div class="flex flex-col gap-8">
+        <div class="flex flex-col items-center text-center">
+          <h1 class="text-2xl font-bold">Crete Account</h1>
+          <p class="text-balance text-muted-foreground">Crete account to your PocketLog account</p>
         </div>
         <div class="space-y-7">
           <FormField v-slot="{ componentField }" name="email" :validate-on-blur="!isFieldDirty">
@@ -71,9 +71,9 @@ const onSubmit = handleSubmit((values) => {
             Continue with Google
           </Button>
         </div>
-        <div className="text-center text-sm">
+        <div class="text-center text-sm">
           Already have an account?
-          <RouterLink to="/sign-in" className="underline hover:text-primary underline-offset-4"> Sign In </RouterLink>
+          <RouterLink to="/sign-in" class="underline hover:text-primary underline-offset-4"> Sign In </RouterLink>
         </div>
       </div>
     </form>
