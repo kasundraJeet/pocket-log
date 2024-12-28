@@ -38,8 +38,8 @@ const onSubmit = handleSubmit((values) => {
     <form className="p-6 md:p-8" @submit="onSubmit">
       <div className="flex flex-col gap-8">
         <div className="flex flex-col items-center text-center">
-          <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="text-balance text-muted-foreground">Login to your PocketLog account</p>
+          <h1 className="text-2xl font-bold">Crete Account</h1>
+          <p className="text-balance text-muted-foreground">Crete account to your PocketLog account</p>
         </div>
         <div class="space-y-7">
           <FormField v-slot="{ componentField }" name="email" :validate-on-blur="!isFieldDirty">
@@ -55,8 +55,6 @@ const onSubmit = handleSubmit((values) => {
             <FormItem>
               <div class="flex items-center">
                 <FormLabel>Password</FormLabel>
-                <RouterLink to="/" class="ml-auto text-sm underline-offset-2 hover:underline">Forgot your password?
-                </RouterLink>
               </div>
               <FormControl>
                 <Input type="password" placeholder="*****" v-bind="componentField" />
@@ -65,17 +63,17 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
         </div>
-        <Button type="submit">Sign In</Button>
-        <Separator label="Or continue with" />
+        <Button type="submit">Crete Account</Button>
+        <Separator label="OR" />
         <div class="space-y-1">
           <Button type="button" variant="outline" class="w-full">
             <Icon icon="ri:google-line" class="!w-5 !h-5" />
-            Login with Google
+            Continue with Google
           </Button>
         </div>
         <div className="text-center text-sm">
-          Don&apos;t have an account?
-          <RouterLink to="/sign-up" className="underline hover:text-primary underline-offset-4"> Sign up </RouterLink>
+          Already have an account?
+          <RouterLink to="/sign-in" className="underline hover:text-primary underline-offset-4"> Sign In </RouterLink>
         </div>
       </div>
     </form>
