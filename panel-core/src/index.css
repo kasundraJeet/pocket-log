@@ -70,6 +70,14 @@
     @apply border-border;
   }
   body {
-    @apply bg-muted text-foreground;
+    @apply bg-background text-foreground;
   }
+}
+
+.layout-wrapper {
+  @apply w-full h-dvh flex flex-col p-1.5;
+}
+
+.layout-header {
+  @apply w-full bg-background relative  pb-1.5 px-2.5 flex items-center justify-between;
 }

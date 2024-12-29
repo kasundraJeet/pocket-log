@@ -1,11 +1,9 @@
 function App() {
   return (
     <>
-      <div>
-122
-      </div>
+
     </>
-  )
+  );
 }
 
-export default App
+export default App;
