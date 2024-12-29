@@ -3,7 +3,10 @@ import FormWrapper from '@/components/custom/FormWrapper.vue'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { supabase } from '@/utils/supabase'
 import { Icon } from '@iconify/vue'
+import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/stores'
 import {
   FormControl,
   FormField,
@@ -14,6 +17,8 @@ import {
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const formSchema = toTypedSchema(z.object({
   email: z.string().email("Invalid email address"),
@@ -28,9 +33,58 @@ const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
-})
+const router = useRouter()
+const isLoading = ref(false)
+const authStore = useAuthStore()
+
+const onSubmit = handleSubmit(async (values) => {
+  isLoading.value = true;
+
+  try {
+    authStore.setLastForm(values)
+    const { data, error } = await supabase.auth.signUp({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (error) {
+      console.error("Error signing up:", error.message);
+      toast.error(error.message)
+    } else {
+      router.push({ name: 'emailsend' })
+      console.log("Sign up success:", data);
+      toast.success('Sign up successful! Check your email for confirmation.')
+    }
+  } catch (e) {
+    console.error("Unexpected error:", e);
+    toast.error('Something went wrong. Please try again later.')
+  } finally {
+    isLoading.value = false;
+  }
+});
+
+async function githubSignUp() {
+  isLoading.value = true;
+
+  try {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'github'
+    })
+
+    if (error) {
+      console.error("Error signing up:", error.message);
+      toast.error(error.message)
+    } else {
+      console.log("Sign up success:", data);
+      toast.success('Sign up successful! Check your email for confirmation.')
+    }
+  } catch (e) {
+    console.error("Unexpected error:", e);
+    toast.error('Something went wrong. Please try again later.')
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 
 <template>
@@ -63,10 +117,13 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
         </div>
-        <Button type="submit">Crete Account</Button>
+        <Button type="submit" :disabled="isLoading">
+          <Icon icon="ri:loader-fill" class="animate-spin" v-if="isLoading" />
+          Crete Account
+        </Button>
         <Separator label="OR" />
         <div class="space-y-1">
-          <Button type="button" variant="outline" class="w-full">
+          <Button type="button" variant="outline" class="w-full" :disabled="isLoading" @click="githubSignUp">
             <Icon icon="ri:google-line" class="!w-5 !h-5" />
             Continue with Google
           </Button>

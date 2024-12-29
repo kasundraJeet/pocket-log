@@ -4,6 +4,9 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Icon } from '@iconify/vue'
+import { supabase } from '@/utils/supabase'
+import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/stores'
 import {
   FormControl,
   FormField,
@@ -14,6 +17,8 @@ import {
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const formSchema = toTypedSchema(z.object({
   email: z.string().email("Invalid email address"),
@@ -28,9 +33,35 @@ const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
-  console.log(values)
-})
+const router = useRouter()
+const isLoading = ref(false)
+const authStore = useAuthStore()
+
+const onSubmit = handleSubmit(async (values) => {
+  isLoading.value = true;
+
+  try {
+    authStore.setLastForm(values);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+    });
+
+    if (error) {
+      console.error("Error signing in:", error.message);
+      toast.error(error.message);
+    } else {
+      router.push({ name: 'emailsend' });
+      console.log("Sign in success:", data);
+      toast.success('Login successful! Welcome back.');
+    }
+  } catch (e) {
+    console.error("Unexpected error:", e);
+    toast.error('Something went wrong. Please try again later.');
+  } finally {
+    isLoading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -55,7 +86,8 @@ const onSubmit = handleSubmit((values) => {
             <FormItem>
               <div class="flex items-center">
                 <FormLabel>Password</FormLabel>
-                <RouterLink to="/" class="ml-auto text-sm underline-offset-2 hover:underline">Forgot your password?
+                <RouterLink to="/forget-password" class="ml-auto text-sm underline-offset-2 hover:underline">Forgot your
+                  password?
                 </RouterLink>
               </div>
               <FormControl>
@@ -65,10 +97,13 @@ const onSubmit = handleSubmit((values) => {
             </FormItem>
           </FormField>
         </div>
-        <Button type="submit">Sign In</Button>
+        <Button type="submit" :disabled="isLoading">
+          <Icon icon="ri:loader-fill" class="animate-spin" v-if="isLoading" />
+          Sign In
+        </Button>
         <Separator label="Or continue with" />
         <div class="space-y-1">
-          <Button type="button" variant="outline" class="w-full">
+          <Button type="button" variant="outline" class="w-full" :disabled="isLoading">
             <Icon icon="ri:google-line" class="!w-5 !h-5" />
             Login with Google
           </Button>

@@ -18,6 +18,30 @@ const router = createRouter({
       name: 'signUp',
       component: () => import('@/views/SignUpView.vue'),
     },
+    {
+      path: '/forget-password',
+      name: 'forgetPassword',
+      component: () => import('@/views/ForgetPasswordView.vue'),
+    },
+    {
+      path: '/reset-password',
+      name: 'resetPassword',
+      component: () => import('@/views/ResetPassword.vue'),
+    },
+    {
+      path: '/email',
+      name: 'emailsend',
+      component: () => import('@/views/EmailSendView.vue'),
+    },
+    {
+      path: '/404',
+      name: 'notFound',
+      component: () => import('@/views/NotFoundView.vue'),
+    },
+    {
+      path: '/:catchAll(.*)',
+      redirect: '404',
+    },
   ],
 })
 
