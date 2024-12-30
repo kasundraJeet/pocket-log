@@ -34,6 +34,11 @@ const router = createRouter({
       component: () => import('@/views/EmailSendView.vue'),
     },
     {
+      path: '/site-map',
+      name: 'siteMap',
+      component: () => import('@/views/SiteMapView.vue'),
+    },
+    {
       path: '/404',
       name: 'notFound',
       component: () => import('@/views/NotFoundView.vue'),
