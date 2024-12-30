@@ -1,6 +1,6 @@
 <script setup>
-import { Button } from '@/components/ui/button';
-import { Icon } from '@iconify/vue';
+import { Button } from '@/components/ui/button'
+import { Icon } from '@iconify/vue'
 </script>
 
 <template>

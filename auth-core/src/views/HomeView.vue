@@ -1,11 +1,33 @@
 <script setup>
 import { Button } from '@/components/ui/button'
-import { Separator } from "@/components/ui/separator"
+import { Separator } from '@/components/ui/separator'
+import quotes from '@/lib/quotes';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+
+const randomIndex = Math.floor(Math.random() * quotes.length);
+const randomQuote = quotes[randomIndex];
 </script>
 
 <template>
   <section class="grid grid-cols-3 w-full h-dvh">
-    <div class="col-span-2"></div>
+    <div class="col-span-2 h-full flex flex-col justify-between py-3 px-5">
+      <div>
+      </div>
+      <div class="space-y-6">
+        <h2 class="text-5xl tracking-wide leading-[1.4] font-bold line-clamp-2">{{ randomQuote.line }}</h2>
+        <div class="flex items-center gap-3.5">
+          <Avatar>
+            <AvatarImage src="https://robohash.org/7842f2320b606ea59343f0f967f891f7?set=set4&bgset=&size=400x400"
+              alt="kasundra jeet" />
+            <AvatarFallback>KJ</AvatarFallback>
+          </Avatar>
+          <div>
+            <h6 class="text-base text-muted-foreground">Kasundra Jeet</h6>
+            <p class="text-xs">A Story writer</p>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="h-full flex flex-col justify-between bg-background px-5 py-3">
       <div></div>
       <div class="flex gap-2.5">

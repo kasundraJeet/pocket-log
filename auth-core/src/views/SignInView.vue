@@ -7,27 +7,24 @@ import { Icon } from '@iconify/vue'
 import { supabase } from '@/utils/supabase'
 import { toast } from 'vue-sonner'
 import { useAuthStore } from '@/stores'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const formSchema = toTypedSchema(z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string()
-    .min(8, "Password must be at least 8 characters")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-    .regex(/[0-9]/, "Password must contain at least one number"),
-}))
+const formSchema = toTypedSchema(
+  z.object({
+    email: z.string().email('Invalid email address'),
+    password: z
+      .string()
+      .min(8, 'Password must be at least 8 characters')
+      .regex(/[A-Z]/, 'Password must contain at least one uppercase letter')
+      .regex(/[a-z]/, 'Password must contain at least one lowercase letter')
+      .regex(/[0-9]/, 'Password must contain at least one number'),
+  }),
+)
 
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
@@ -38,30 +35,30 @@ const isLoading = ref(false)
 const authStore = useAuthStore()
 
 const onSubmit = handleSubmit(async (values) => {
-  isLoading.value = true;
+  isLoading.value = true
 
   try {
-    authStore.setLastForm(values);
+    authStore.setLastForm(values)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
-    });
+    })
 
     if (error) {
-      console.error("Error signing in:", error.message);
-      toast.error(error.message);
+      console.error('Error signing in:', error.message)
+      toast.error(error.message)
     } else {
-      router.push({ name: 'emailsend' });
-      console.log("Sign in success:", data);
-      toast.success('Login successful! Welcome back.');
+      router.push({ name: 'emailsend' })
+      console.log('Sign in success:', data)
+      toast.success('Login successful! Welcome back.')
     }
   } catch (e) {
-    console.error("Unexpected error:", e);
-    toast.error('Something went wrong. Please try again later.');
+    console.error('Unexpected error:', e)
+    toast.error('Something went wrong. Please try again later.')
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
-});
+})
 </script>
 
 <template>
@@ -110,7 +107,9 @@ const onSubmit = handleSubmit(async (values) => {
         </div>
         <div class="text-center text-sm">
           Don&apos;t have an account?
-          <RouterLink to="/sign-up" class="underline hover:text-primary underline-offset-4"> Sign up </RouterLink>
+          <RouterLink to="/sign-up" class="underline hover:text-primary underline-offset-4">
+            Sign up
+          </RouterLink>
         </div>
       </div>
     </form>

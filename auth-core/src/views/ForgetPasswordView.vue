@@ -6,22 +6,18 @@ import { Icon } from '@iconify/vue'
 import { supabase } from '@/utils/supabase'
 import { toast } from 'vue-sonner'
 import { useAuthStore } from '@/stores'
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const formSchema = toTypedSchema(z.object({
-  email: z.string().email("Invalid email address")
-}))
+const formSchema = toTypedSchema(
+  z.object({
+    email: z.string().email('Invalid email address'),
+  }),
+)
 
 const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
@@ -32,29 +28,29 @@ const isLoading = ref(false)
 const authStore = useAuthStore()
 
 const onSubmit = handleSubmit(async (values) => {
-  isLoading.value = true;
+  isLoading.value = true
 
   try {
-    authStore.setLastForm(values);
+    authStore.setLastForm(values)
     const { data, error } = await supabase.auth.resetPasswordForEmail(values.email, {
       redirectTo: 'http://localhost:5173/reset-password',
-    });
+    })
 
     if (error) {
-      console.error("Error resetting password:", error.message);
-      toast.error(error.message);
+      console.error('Error resetting password:', error.message)
+      toast.error(error.message)
     } else {
-      router.push({ name: 'emailsend' });
-      console.log("Password reset request successful:", data);
-      toast.success('Password reset email sent! Please check your inbox.');
+      router.push({ name: 'emailsend' })
+      console.log('Password reset request successful:', data)
+      toast.success('Password reset email sent! Please check your inbox.')
     }
   } catch (e) {
-    console.error("Unexpected error:", e);
-    toast.error('Something went wrong. Please try again later.');
+    console.error('Unexpected error:', e)
+    toast.error('Something went wrong. Please try again later.')
   } finally {
-    isLoading.value = false;
+    isLoading.value = false
   }
-});
+})
 </script>
 
 <template>

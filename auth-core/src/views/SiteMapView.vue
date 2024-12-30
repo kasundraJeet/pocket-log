@@ -1,6 +1,6 @@
 <script setup>
 import FormWrapper from '@/components/custom/FormWrapper.vue'
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 </script>
 
 <template>

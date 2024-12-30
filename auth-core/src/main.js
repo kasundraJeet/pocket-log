@@ -1,10 +1,9 @@
 import './assets/index.css'
-import "vue-fast-marquee/style.css";
-
+import 'vue-fast-marquee/style.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-import Marquee from 'vue-fast-marquee';
+import Marquee from 'vue-fast-marquee'
 
 import App from './App.vue'
 import router from './router'
