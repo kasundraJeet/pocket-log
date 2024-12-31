@@ -1,0 +1,6 @@
+country
+city
+currency
+phone_number
+dob
+gender
