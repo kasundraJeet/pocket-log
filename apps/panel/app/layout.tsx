@@ -19,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${supremeSans.variable}`}>
-        {children}
-      </body>
+      <body className={`${supremeSans.variable} antialiased`}>{children}</body>
     </html>
   );
 }
