@@ -7,7 +7,9 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
-    'shadcn-nuxt'
+    'shadcn-nuxt',
+    '@nuxt/image',
+    '@nuxt/eslint'
   ],
   shadcn: {
     prefix: '',
