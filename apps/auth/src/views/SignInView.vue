@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator'
 import { Icon } from '@iconify/vue'
 import { supabase } from '@/utils/supabase'
 import { toast } from 'vue-sonner'
-import { useAuthStore } from '@/stores'
+import { useAuthStore, useUrlStore } from '@/stores'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
@@ -31,6 +31,7 @@ const { isFieldDirty, handleSubmit } = useForm({
 
 const isLoading = ref(false)
 const authStore = useAuthStore()
+const urlStore = useUrlStore()
 
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
@@ -45,8 +46,13 @@ const onSubmit = handleSubmit(async (values) => {
       console.error('Error signing in:', error.message)
       toast.error(error.message)
     } else {
-      const url = `${import.meta.env.VITE_PANEL_DOMAIN}?token=${encodeURIComponent(data.session.access_token)}&expires_at=${encodeURIComponent(data.session.expires_at)}&refresh_token=${encodeURIComponent(data.session.refresh_token)}&token_type=${encodeURIComponent(data.session.token_type)}`;
-      window.location.href = url;
+      const modifyObject = {
+        token: data.session.access_token,
+        expires_at: data.session.expires_at,
+        refresh_token: data.session.refresh_token,
+        token_type: data.session.token_type
+      }
+      urlStore.setsession(modifyObject)
       toast.success('Login successful! Welcome back.')
     }
   } catch (e) {

@@ -2,10 +2,30 @@
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import quotes from '@/lib/quotes';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { useUrlStore } from '@/stores'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { useRoute } from 'vue-router'
+import { onMounted } from 'vue';
 
+const route = useRoute();
+const urlStore = useUrlStore()
 const randomIndex = Math.floor(Math.random() * quotes.length);
 const randomQuote = quotes[randomIndex];
+
+// const isSession = route.route.type === 'signup' || route.query.type === 'recovery';
+
+const getErrorFromHash = () => {
+  const hash = window.location.hash;
+  const params = new URLSearchParams(hash.replace('#', ''));
+  const isError = params.get('error') || '';
+  if(isError){
+    urlStore.setError(true)
+  }
+};
+
+onMounted(() => {
+  getErrorFromHash();
+});
 </script>
 
 <template>
