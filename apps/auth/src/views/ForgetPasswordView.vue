@@ -32,14 +32,13 @@ const onSubmit = handleSubmit(async (values) => {
 
   try {
     authStore.setLastForm(values)
-    const { data, error } = await supabase.auth.resetPasswordForEmail(values.email)
+    const {  error } = await supabase.auth.resetPasswordForEmail(values.email)
 
     if (error) {
       console.error('Error resetting password:', error.message)
       toast.error(error.message)
     } else {
       router.push({ name: 'emailsend' })
-      console.log('Password reset request successful:', data)
       toast.success('Password reset email sent! Please check your inbox.')
     }
   } catch (e) {

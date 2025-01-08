@@ -12,7 +12,6 @@ import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
 const formSchema = toTypedSchema(
   z.object({
@@ -30,28 +29,24 @@ const { isFieldDirty, handleSubmit } = useForm({
   validationSchema: formSchema,
 })
 
-const router = useRouter()
 const isLoading = ref(false)
 const authStore = useAuthStore()
 
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
-  console.log(import.meta.env.VITE_PANEL_DOMAIN)
   try {
     authStore.setLastForm(values)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
-    },{
-      redirectTo: `${import.meta.env.VITE_PANEL_DOMAIN}`,
     })
 
     if (error) {
       console.error('Error signing in:', error.message)
       toast.error(error.message)
     } else {
-      router.push({ name: 'emailsend' })
-      console.log('Sign in success:', data)
+      const url = `${import.meta.env.VITE_PANEL_DOMAIN}?token=${encodeURIComponent(data.session.access_token)}&expires_at=${encodeURIComponent(data.session.expires_at)}&refresh_token=${encodeURIComponent(data.session.refresh_token)}&token_type=${encodeURIComponent(data.session.token_type)}`;
+      window.location.href = url;
       toast.success('Login successful! Welcome back.')
     }
   } catch (e) {

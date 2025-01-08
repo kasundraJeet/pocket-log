@@ -1,6 +1,11 @@
-sign up after redict to panel with accses token
+sign up after redict to home and home with accses token redict to panel
 sign up validation work
 sign up reponse check if exist user sign up agian
-sign up and with out confirn sign in check - issues
-forgert password validation
-forget password without meial exist.
+sign up and with out confirn sign in check - issues (email template chnage it's work)
+forgert password validation work
+forget password without user exist. - issues
+sign in validation work
+sign in reponse check
+sign in redict to panel
+forgert password send mail work
+home page url checker
