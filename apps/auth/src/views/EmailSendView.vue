@@ -1,10 +1,20 @@
 <script setup>
+import { onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 import FormWrapper from '@/components/custom/FormWrapper.vue'
 import { Button } from '@/components/ui/button'
 import { Icon } from '@iconify/vue'
 import { useAuthStore } from '@/stores'
 
 const authStore = useAuthStore()
+const router = useRouter()
+
+
+onBeforeMount(() => {
+  if (!authStore.lastValue) {
+    router.push('/sign-in')
+  }
+})
 </script>
 
 <template>
@@ -15,10 +25,10 @@ const authStore = useAuthStore()
           <Icon icon="ri:mail-send-line" class="w-14 h-14" />
           <p class="text-center text-base text-muted-foreground">
             Your email has been successfully sent to
-            <b class="text-primary">{{
-              authStore.lastValue ? authStore.lastValue.email : 'your mail'
-            }}</b
-            >.
+            <b class="text-primary">
+              {{
+                authStore.lastValue ? authStore.lastValue.email : 'your mail'
+              }}</b>.
           </p>
         </div>
         <Button as-child>

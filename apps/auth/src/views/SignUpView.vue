@@ -39,7 +39,7 @@ const onSubmit = handleSubmit(async (values) => {
 
   try {
     authStore.setLastForm(values)
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
     }, {
@@ -51,7 +51,6 @@ const onSubmit = handleSubmit(async (values) => {
       toast.error(error.message)
     } else {
       router.push({ name: 'emailsend' })
-      console.log('Sign up success:', data)
       toast.success('Sign up successful! Check your email for confirmation.')
     }
   } catch (e) {
@@ -122,13 +121,7 @@ async function githubSignUp() {
         </Button>
         <Separator label="OR" />
         <div class="space-y-1">
-          <Button
-            type="button"
-            variant="outline"
-            class="w-full"
-            :disabled="isLoading"
-            @click="githubSignUp"
-          >
+          <Button type="button" variant="outline" class="w-full" :disabled="isLoading" @click="githubSignUp">
             <Icon icon="ri:google-line" class="!w-5 !h-5" />
             Continue with Google
           </Button>

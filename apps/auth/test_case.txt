@@ -1,0 +1,6 @@
+sign up after redict to panel with accses token
+sign up validation work
+sign up reponse check if exist user sign up agian
+sign up and with out confirn sign in check - issues
+forgert password validation
+forget password without meial exist.
