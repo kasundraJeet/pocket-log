@@ -42,6 +42,8 @@ const onSubmit = handleSubmit(async (values) => {
     const { data, error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
+    }, {
+      redirectTo: `${import.meta.env.VITE_PANEL_DOMAIN}`,
     })
 
     if (error) {

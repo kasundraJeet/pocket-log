@@ -33,7 +33,7 @@ const onSubmit = handleSubmit(async (values) => {
   try {
     authStore.setLastForm(values)
     const { data, error } = await supabase.auth.resetPasswordForEmail(values.email, {
-      redirectTo: 'http://localhost:5173/reset-password',
+      redirectTo: `${import.meta.env.VITE_AUTH_DOMAIN}reset-password`,
     })
 
     if (error) {

@@ -36,12 +36,14 @@ const authStore = useAuthStore()
 
 const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
-
+  console.log(import.meta.env.VITE_PANEL_DOMAIN)
   try {
     authStore.setLastForm(values)
     const { data, error } = await supabase.auth.signInWithPassword({
       email: values.email,
       password: values.password,
+    },{
+      redirectTo: `${import.meta.env.VITE_PANEL_DOMAIN}`,
     })
 
     if (error) {

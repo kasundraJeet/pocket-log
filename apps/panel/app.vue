@@ -1,10 +1,14 @@
 <script setup>
+const colorMode = useColorMode()
 
+console.log(colorMode.preference)
 </script>
 
 <template>
   <div>
     <NuxtRouteAnnouncer />
   </div>
-  <NuxtPage />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
