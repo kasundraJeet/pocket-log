@@ -54,7 +54,7 @@ const onSubmit = handleSubmit(async (values) => {
   isLoading.value = true
 
   try {
-    const { data, error } = await supabase.auth.api.updateUser(authStore.user.id, {
+    const { data, error } = await supabase.auth.updateUser(authStore.user.id, {
       password: values.password,
     })
 
@@ -89,19 +89,9 @@ const onSubmit = handleSubmit(async (values) => {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <div class="relative w-full">
-                  <Input
-                    :type="input1 ? 'text' : 'password'"
-                    placeholder="New Password"
-                    v-bind="componentField"
-                  />
+                  <Input :type="input1 ? 'text' : 'password'" placeholder="New Password" v-bind="componentField" />
                   <div class="absolute inset-y-0 end-1 mt-0.5">
-                    <Button
-                      variant="ghost"
-                      type="button"
-                      class="max-w-8 max-h-8"
-                      size="icon"
-                      @click="input1 = !input1"
-                    >
+                    <Button variant="ghost" type="button" class="max-w-8 max-h-8" size="icon" @click="input1 = !input1">
                       <Icon :icon="!input1 ? 'ri:eye-line' : 'ri:eye-close-line'" />
                     </Button>
                   </div>
@@ -110,28 +100,14 @@ const onSubmit = handleSubmit(async (values) => {
               <FormMessage />
             </FormItem>
           </FormField>
-          <FormField
-            v-slot="{ componentField }"
-            name="confirmPassword"
-            :validate-on-blur="!isFieldDirty"
-          >
+          <FormField v-slot="{ componentField }" name="confirmPassword" :validate-on-blur="!isFieldDirty">
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
                 <div class="relative w-full">
-                  <Input
-                    :type="input2 ? 'text' : 'password'"
-                    placeholder="confirm Password"
-                    v-bind="componentField"
-                  />
+                  <Input :type="input2 ? 'text' : 'password'" placeholder="confirm Password" v-bind="componentField" />
                   <div class="absolute inset-y-0 end-1 mt-0.5">
-                    <Button
-                      variant="ghost"
-                      type="button"
-                      class="max-w-8 max-h-8"
-                      size="icon"
-                      @click="input2 = !input2"
-                    >
+                    <Button variant="ghost" type="button" class="max-w-8 max-h-8" size="icon" @click="input2 = !input2">
                       <Icon :icon="!input2 ? 'ri:eye-line' : 'ri:eye-close-line'" />
                     </Button>
                   </div>

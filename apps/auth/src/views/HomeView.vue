@@ -4,22 +4,39 @@ import { Separator } from '@/components/ui/separator'
 import quotes from '@/lib/quotes';
 import { useUrlStore } from '@/stores'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useRoute } from 'vue-router'
 import { onMounted } from 'vue';
 
-const route = useRoute();
 const urlStore = useUrlStore()
 const randomIndex = Math.floor(Math.random() * quotes.length);
 const randomQuote = quotes[randomIndex];
 
-// const isSession = route.route.type === 'signup' || route.query.type === 'recovery';
 
 const getErrorFromHash = () => {
   const hash = window.location.hash;
   const params = new URLSearchParams(hash.replace('#', ''));
   const isError = params.get('error') || '';
-  if(isError){
+  const isSession = params.get('type') || '';
+  if (isError) {
     urlStore.setError(true)
+  }
+  if (isSession === 'signup') {
+    const modifyObject = {
+      token: params.get('access_token'),
+      expires_at: params.get('expires_at'),
+      refresh_token: params.get('refresh_token'),
+      token_type: params.get('token_type')
+    }
+    urlStore.setsession(modifyObject)
+  }
+  if (isSession === 'recovery') {
+    const modifyObject = {
+      token: params.get('access_token'),
+      expires_at: params.get('expires_at'),
+      refresh_token: params.get('refresh_token'),
+      token_type: params.get('token_type'),
+      redictTo: '/reset-password'
+    }
+    urlStore.setsession(modifyObject)
   }
 };
 

@@ -10,3 +10,6 @@ sign in redict to panel
 forgert password send mail work
 home page url checker
 exipred email link open not accses
+email accses only one time
+forget password to reset password this token in url store
+reset password validation
