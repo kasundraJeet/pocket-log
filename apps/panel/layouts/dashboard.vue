@@ -20,7 +20,7 @@ const dashbaordLinks = ref([
         links: [
             {
                 id: 31,
-                link: '/',
+                link: '/dashboard/preference',
                 name: 'Preferences',
             }
         ]
@@ -80,10 +80,10 @@ const dashbaordLinks = ref([
                 </li>
             </ul>
         </aside>
-        <ScrollArea class="w-full h-full py-4">
-            <div class="container">
+        <ScrollArea class="w-full h-full">
+            <main class="container py-4">
                 <slot />
-            </div>
+            </main>
         </ScrollArea>
     </div>
 </template>
