@@ -34,7 +34,7 @@ const navLinks = ref([{
                                 <TooltipProvider>
                                     <Tooltip>
                                         <TooltipTrigger as-child>
-                                            <Button size="icon" variant="ghost" as-child>
+                                            <Button size="icon" variant="outline" as-child>
                                                 <RouterLink :to="nav.nav_link">
                                                     <Icon :icon="nav.nav_icon" />
                                                 </RouterLink>
@@ -49,7 +49,12 @@ const navLinks = ref([{
                         </ul>
                     </li>
                 </ul>
-                <div>
+                <div class="space-y-4 flex items-center flex-col justify-center">
+                    <div class="flex flex-col gap-1 items-center justify-center">
+                        <Button variant="ghost" size="icon">
+                            <Icon icon="solar:bell-bing-broken" class="w-4 h-4" />
+                        </Button>
+                    </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger as-child>
                             <Button size="icon" variant="ghost">
@@ -89,21 +94,8 @@ const navLinks = ref([{
                 </div>
             </div>
         </ScrollArea>
-        <div class="flex flex-col w-full h-full">
-            <header class="border-b border-input flex justify-between w-full gap-4 py-1 px-2">
-                <div />
-                <div class="flex items-stretch gap-1">
-                    <Button variant="ghost" size="icon">
-                    <Icon icon="solar:bell-bing-broken" class="w-4 h-4" />
-                </Button>
-                    <Button variant="ghost" size="icon">
-                        <Icon icon="solar:info-circle-broken" class="w-4 h-4" />
-                    </Button>
-                </div>
-            </header>
-            <ScrollArea class="h-full w-full">
-                <slot />
-            </ScrollArea>
-        </div>
+        <ScrollArea class="h-full w-full">
+            <slot />
+        </ScrollArea>
     </main>
 </template>

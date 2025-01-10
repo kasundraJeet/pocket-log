@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'supreme';
+  src: url('/fonts/supreme.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -71,5 +79,6 @@
   }
   body {
     @apply bg-background text-foreground;
+  font-family: 'supreme';
   }
 }
