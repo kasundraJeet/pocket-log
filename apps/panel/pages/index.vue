@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="container py-2.5">
     12
   </div>
 </template>

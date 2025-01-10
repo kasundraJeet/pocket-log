@@ -1,8 +1,6 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 
-const colorMode = useColorMode()
-console.log(colorMode.preference)
 const navLinks = ref([{
     nav_group: [
         {
@@ -11,6 +9,14 @@ const navLinks = ref([{
             nav_item: 'Home',
             nav_link: '/',
             nav_icon: 'solar:home-linear',
+            nav_active: ['/']
+        },
+        {
+
+            id: 2,
+            nav_item: 'Transactions',
+            nav_link: '/',
+            nav_icon: 'ant-design:transaction-outlined',
             nav_active: ['/']
         }
     ]
@@ -23,7 +29,7 @@ const navLinks = ref([{
             <div class="flex flex-col h-dvh justify-between items-center gap-4 py-2  w-full">
                 <ul class="flex flex-col  p-2">
                     <li v-for="(item, index) in navLinks" :key="index">
-                        <ul>
+                        <ul class="space-y-1">
                             <li v-for="nav in item.nav_group" :key="nav.id">
                                 <TooltipProvider>
                                     <Tooltip>
@@ -84,7 +90,17 @@ const navLinks = ref([{
             </div>
         </ScrollArea>
         <div class="flex flex-col w-full h-full">
-            <header class="border-b border-input">asa</header>
+            <header class="border-b border-input flex justify-between w-full gap-4 py-1 px-2">
+                <div />
+                <div class="flex items-stretch gap-1">
+                    <Button variant="ghost" size="icon">
+                    <Icon icon="solar:bell-bing-broken" class="w-4 h-4" />
+                </Button>
+                    <Button variant="ghost" size="icon">
+                        <Icon icon="solar:info-circle-broken" class="w-4 h-4" />
+                    </Button>
+                </div>
+            </header>
             <ScrollArea class="h-full w-full">
                 <slot />
             </ScrollArea>
