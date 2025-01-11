@@ -1,9 +1,10 @@
 <script setup>
 import { Icon } from '@iconify/vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useSessionStore } from '@/stores'
 
 const route = useRoute()
+const routes = useRouter()
 const sessionStore = useSessionStore()
 
 const queryParams = route.query
@@ -12,12 +13,12 @@ const error = ref(false)
 onMounted(() => {
     if (queryParams.token) {
         if (typeof window !== 'undefined') {
-            alert('yes')
             localStorage.removeItem('session')
         }
         sessionStore.setSession(queryParams)
     } else {
         error.value = true
+        routes.push('/session-close')
     }
 })
 

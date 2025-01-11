@@ -39,6 +39,7 @@
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@vueuse/nuxt": "^12.3.0",
+    "nuxt-security": "^2.1.5",
     "pinia-plugin-persistedstate": "^4.2.0",
     "typescript": "^5.7.2"
   }

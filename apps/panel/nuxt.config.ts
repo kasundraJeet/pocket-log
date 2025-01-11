@@ -10,7 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/eslint',
     'pinia-plugin-persistedstate',
-    '@nuxtjs/supabase'
+    '@nuxtjs/supabase',
+    'nuxt-security'
   ],
   shadcn: {
     prefix: '',
