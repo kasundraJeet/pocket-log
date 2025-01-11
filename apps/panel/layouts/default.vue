@@ -50,11 +50,6 @@ const navLinks = ref([{
                     </li>
                 </ul>
                 <div class="space-y-4 flex items-center flex-col justify-center">
-                    <div class="flex flex-col gap-1 items-center justify-center">
-                        <Button variant="ghost" size="icon">
-                            <Icon icon="solar:bell-bing-broken" class="w-4 h-4" />
-                        </Button>
-                    </div>
                     <DropdownMenu>
                         <DropdownMenuTrigger as-child>
                             <Button size="icon" variant="ghost">

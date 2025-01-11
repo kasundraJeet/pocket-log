@@ -11,7 +11,7 @@ definePageMeta({
         <h1 class="text-2xl font-bold">Welcome to Pocket Log</h1>
         <p class="text-muted-foreground text-base">Track your expenses and manage your finances effortlessly.</p>
       </div>
-      <Button variant="outline">
+      <Button variant="outline" as-child>
         <RouterLink to="/dashboard/account">Start with Select Account</RouterLink>
       </Button>
     </div>

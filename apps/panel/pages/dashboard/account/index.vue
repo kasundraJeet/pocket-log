@@ -35,5 +35,29 @@ const paused = ref(true)
             </DropdownMenu>
             <Button variant="secondary">New Account</Button>
         </div>
+        <div class="grid grid-cols-3 gap-4">
+            <Card class="relative">
+                <Badge class="absolute right-2.5 top-2.5" variant="secondary">Free</Badge>
+                <CardHeader class="pb-0">
+                    <CardTitle>Personal Account</CardTitle>
+                    <div class="flex flex-wrap gap-1.5 mt-2.5">
+                        <Badge variant="outline">4 Notifaction</Badge>
+                        <Badge variant="destructive">2 Alert</Badge>
+                    </div>
+                </CardHeader>
+                <CardContent class="flex flex-col justify-end  min-h-40   ">
+                    <div class="flex items-center  justify-between">
+                        <Button size="icon" variant="outline">
+                            <Icon icon="solar:settings-broken" />
+                        </Button>
+                        <Button size="icon" variant="outline" as-child>
+                            <RouterLink to="/">
+                                <Icon icon="solar:arrow-right-up-broken" />
+                            </RouterLink>
+                        </Button>
+                    </div>
+                </CardContent>
+            </Card>
+        </div>
     </div>
 </template>
