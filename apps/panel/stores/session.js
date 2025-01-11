@@ -13,7 +13,7 @@ export const useSessionStore = defineStore(
     );
     const router = useRouter();
 
-    function setSession(value) {
+    function setSession(value, is_refesh) {
       sessionData.value = value;
 
       const expiresAt = value?.expires_at;
@@ -27,7 +27,9 @@ export const useSessionStore = defineStore(
         }
       }
 
-      router.push("/initialize-profile");
+      if (!is_refesh) {
+        router.push("/initialize-profile");
+      }
     }
 
     async function triggerFunction() {
@@ -41,7 +43,7 @@ export const useSessionStore = defineStore(
       });
 
       if (error) {
-        console.error("Error refreshing session:", error.message);
+        router.push("/session-close");
         return;
       }
 
@@ -52,7 +54,7 @@ export const useSessionStore = defineStore(
         token_type: data.session.token_type,
       };
 
-      setSession(modifyObject);
+      setSession(modifyObject, true);
     }
 
     return { setSession, sessionData };
