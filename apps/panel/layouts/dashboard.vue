@@ -1,5 +1,9 @@
 <script setup>
 import { Icon } from '@iconify/vue'
+import { useSessionStore } from '@/stores'
+
+const sessionStore = useSessionStore()
+console.log(sessionStore.sessionData.refresh_token)
 
 const dashbaordLinks = ref([
     {

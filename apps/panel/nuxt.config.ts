@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
@@ -9,7 +8,9 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'shadcn-nuxt',
     '@nuxt/image',
-    '@nuxt/eslint'
+    '@nuxt/eslint',
+    'pinia-plugin-persistedstate',
+    '@nuxtjs/supabase'
   ],
   shadcn: {
     prefix: '',
@@ -25,5 +26,8 @@ export default defineNuxtConfig({
     classSuffix: '',
     storage: 'cookie',
     storageKey: 'nuxt-color-mode'
+  },
+  supabase: {
+    redirect: false,
   }
 })
