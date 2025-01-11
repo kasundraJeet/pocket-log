@@ -9,7 +9,7 @@ export const useUrlStore = defineStore('url', () => {
 
   function setsession(value) {
     session.value = value
-    const url = `${import.meta.env.VITE_PANEL_DOMAIN}?token=${encodeURIComponent(value.token)}&expires_at=${encodeURIComponent(value.expires_at)}&refresh_token=${encodeURIComponent(value.refresh_token)}&token_type=${encodeURIComponent(value.token_type)}`
+    const url = `${import.meta.env.VITE_PANEL_DOMAIN}url-confing?token=${encodeURIComponent(value.token)}&expires_at=${encodeURIComponent(value.expires_at)}&refresh_token=${encodeURIComponent(value.refresh_token)}&token_type=${encodeURIComponent(value.token_type)}`
     if (!value.redictTo) {
       window.location.href = url
     } else {
