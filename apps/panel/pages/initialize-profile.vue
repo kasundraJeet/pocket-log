@@ -15,6 +15,19 @@ const formSchema = toTypedSchema(z.object({
     phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, 'Invalid phone number format')
 }))
 
+async function fetchCountries() {
+  try {
+    const { data: { countries } } = await useFetch('/api/countries', {
+        headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    console.log(countries)
+  } catch (error) {
+    console.error('Error fetching countries:', error)
+  }
+}
+
 const { isFieldDirty, handleSubmit } = useForm({
     validationSchema: formSchema,
 })
@@ -22,6 +35,7 @@ const { isFieldDirty, handleSubmit } = useForm({
 const onSubmit = handleSubmit((values) => {
     console.log(values)
 })
+
 
 const countries = [
     { label: 'USA', value: 'USA' },
@@ -36,6 +50,10 @@ const currencies = [
     { label: 'EUR', value: 'EUR' },
     { label: 'GBP', value: 'GBP' }
 ]
+
+onMounted(() => {
+    fetchCountries()
+})
 </script>
 
 <template>
@@ -85,7 +103,8 @@ const currencies = [
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem v-for="country in countries" :key="country.value" :value="country.value">
+                                                <SelectItem v-for="country in countries" :key="country.value"
+                                                    :value="country.value">
                                                     {{ country.label }}
                                                 </SelectItem>
                                             </SelectContent>
@@ -105,7 +124,8 @@ const currencies = [
                                                 </SelectTrigger>
                                             </FormControl>
                                             <SelectContent>
-                                                <SelectItem v-for="currency in currencies" :key="currency.value" :value="currency.value">
+                                                <SelectItem v-for="currency in currencies" :key="currency.value"
+                                                    :value="currency.value">
                                                     {{ currency.label }}
                                                 </SelectItem>
                                             </SelectContent>
